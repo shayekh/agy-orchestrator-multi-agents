@@ -105,7 +105,7 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
               onClick={handleStart}
               className="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-600 text-slate-950 font-black tracking-wide text-sm flex items-center gap-2 shadow-glow-x hover:brightness-110 transition-all"
             >
-              <Play className="w-4 h-4 fill-current" /> START MATCH
+              <Play className="w-4 h-4 fill-current" /> ENTER ARENA
             </motion.button>
           ) : isPaused ? (
             <motion.button
@@ -188,9 +188,9 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
       </div>
 
       {/* Mode & Grid Config Section */}
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="flex flex-col md:flex-row gap-6">
         {/* Game Mode Selector */}
-        <div className="flex flex-col gap-3">
+        <div className="flex-1 flex flex-col gap-3">
           <label className="text-xs font-bold font-mono uppercase text-slate-400 tracking-wider flex items-center gap-1.5">
             <Cpu className="w-4 h-4 text-cyan-400" /> Mode Selection
           </label>
@@ -225,7 +225,7 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
         </div>
 
         {/* Board Size & Turn Timer & Master Volume Settings */}
-        <div className="flex flex-col gap-5">
+        <div className="flex-1 flex flex-col gap-5">
           {/* Board Size */}
           <div className="flex flex-col gap-2.5">
             <label className="text-xs font-bold font-mono uppercase text-slate-400 tracking-wider flex items-center gap-1.5">

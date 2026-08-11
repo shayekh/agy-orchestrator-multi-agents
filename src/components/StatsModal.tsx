@@ -149,7 +149,10 @@ export const StatsModal: React.FC<StatsModalProps> = ({
 
               <div className="grid grid-cols-2 gap-2 text-center">
                 <div className="bg-slate-900/60 p-2.5 rounded-xl border border-white/5">
-                  <div className="text-xl font-black font-mono text-cyan-400">{playerX.stats.wins}</div>
+                  <div className="text-xl font-black font-mono text-cyan-400">
+                    {playerX.stats.wins}
+                    <span className="sr-only">Player X Wins</span>
+                  </div>
                   <div className="text-[10px] text-slate-400 font-mono">VICTORIES</div>
                 </div>
                 <div className="bg-slate-900/60 p-2.5 rounded-xl border border-white/5">
@@ -180,7 +183,10 @@ export const StatsModal: React.FC<StatsModalProps> = ({
 
               <div className="grid grid-cols-2 gap-2 text-center">
                 <div className="bg-slate-900/60 p-2.5 rounded-xl border border-white/5">
-                  <div className="text-xl font-black font-mono text-pink-400">{playerO.stats.wins}</div>
+                  <div className="text-xl font-black font-mono text-pink-400">
+                    {playerO.stats.wins}
+                    <span className="sr-only">Player O / AI Wins</span>
+                  </div>
                   <div className="text-[10px] text-slate-400 font-mono">VICTORIES</div>
                 </div>
                 <div className="bg-slate-900/60 p-2.5 rounded-xl border border-white/5">
@@ -255,7 +261,10 @@ export const StatsModal: React.FC<StatsModalProps> = ({
 
           {/* Footer & Reset Action */}
           <div className="flex items-center justify-between pt-2 border-t border-white/10">
-            <span className="text-xs font-mono text-slate-400">DRAW MATCHES: <span className="text-white font-bold">{playerX.stats.draws}</span></span>
+            <span className="text-xs font-mono text-slate-400">
+              DRAW MATCHES: <span className="text-white font-bold">{playerX.stats.draws}</span>
+              <span className="sr-only">Draw Matches</span>
+            </span>
             <button
               onClick={handleResetStats}
               className="px-4 py-2 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 hover:bg-rose-500/20 transition-all text-xs font-bold flex items-center gap-1.5"
