@@ -191,18 +191,18 @@ describe('Tier 2: Boundary & Corner Cases Test Suite', () => {
       state = gameReducer(state, { type: 'START_GAME' });
 
       // Board setup before move 9:
-      // X O X
-      // O X O
-      // X O .  (Index 8 is empty, X's turn)
+      // X O O
+      // X X O
+      // O X .  (Index 8 is empty, X's turn)
       const moves = [
         0, // X at 0
-        1, // O at 1
         2, // O at 2
-        3, // X at 3
         4, // X at 4 (center)
+        1, // O at 1
+        3, // X at 3
         5, // O at 5
-        6, // O at 6
         7, // X at 7
+        6, // O at 6
       ];
 
       moves.forEach((idx) => {

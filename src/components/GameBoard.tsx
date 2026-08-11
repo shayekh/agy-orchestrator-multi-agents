@@ -33,7 +33,7 @@ export const GameBoard: React.FC<GameBoardProps> = ({ gameState, onCellClick, is
         <div className="absolute inset-0 scanlines opacity-30 pointer-events-none" />
 
         {/* Dynamic Grid */}
-        <div className={`grid ${gridColsClass} gap-2.5 md:gap-3.5 w-full h-full z-10`}>
+        <div data-testid="game-board-grid" className={`grid ${gridColsClass} gap-2.5 md:gap-3.5 w-full h-full z-10`}>
           {board.map((cellValue, idx) => {
             const isWinningCell = winningCombo.includes(idx);
             const isHinted = hintIndex === idx;

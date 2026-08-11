@@ -189,13 +189,15 @@ describe('Tier 4 Real-World Application Workloads & Stress Tests', () => {
       fireEvent.click(statsTabButton);
 
       // Verify Leaderboard UI Displays Correct Stats
-      expect(screen.getByText('Player X Wins')).toBeInTheDocument();
-      expect(screen.getByText('Player O / AI Wins')).toBeInTheDocument();
+      const pxWins = screen.getByText('Player X Wins');
+      const poWins = screen.getByText('Player O / AI Wins');
+      expect(pxWins).toBeInTheDocument();
+      expect(poWins).toBeInTheDocument();
       expect(screen.getByText('Draw Matches')).toBeInTheDocument();
 
       // Check numbers in DOM
-      expect(screen.getByText('2')).toBeInTheDocument(); // Player X wins count
-      expect(screen.getByText('1')).toBeInTheDocument(); // Player O wins count
+      expect(pxWins.parentElement?.textContent).toContain('2'); // Player X wins count
+      expect(poWins.parentElement?.textContent).toContain('1'); // Player O wins count
     });
   });
 
@@ -238,7 +240,7 @@ describe('Tier 4 Real-World Application Workloads & Stress Tests', () => {
       }
 
       // Return to Arena tab and verify UI is responsive
-      const arenaTabButton = screen.getByRole('button', { name: /arena/i });
+      const arenaTabButton = screen.getByRole('button', { name: /^arena$/i });
       fireEvent.click(arenaTabButton);
 
       // Assert board is visible and interactive
@@ -305,14 +307,14 @@ describe('Tier 4 Real-World Application Workloads & Stress Tests', () => {
       const btn4x4 = screen.getByRole('button', { name: /4x4/i });
       fireEvent.click(btn4x4);
 
-      const arenaTab = screen.getByRole('button', { name: /arena/i });
+      const arenaTab = screen.getByRole('button', { name: /^arena$/i });
       fireEvent.click(arenaTab);
 
       // Start game on 4x4 grid
       const startBtn = screen.getByText(/ENTER ARENA|START MATCH/i);
       fireEvent.click(startBtn);
 
-      const gridContainer = document.querySelector('.grid');
+      const gridContainer = document.querySelector('[data-testid="game-board-grid"]');
       expect(gridContainer).toHaveClass('grid-cols-4');
       const cells = gridContainer?.querySelectorAll('button');
       expect(cells?.length).toBe(16);

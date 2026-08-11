@@ -32,7 +32,7 @@ describe('Tier 3 Cross-Feature Interactions', () => {
     fireEvent.click(startButton);
 
     // Get 9 grid cells on 3x3 board
-    const cells = container.querySelectorAll('.grid > button');
+    const cells = container.querySelectorAll('[data-testid="game-board-grid"] button');
     expect(cells.length).toBe(9);
 
     // Play sequence: X at 0, O at 3, X at 1, O at 4, X at 2 (Row 1 win for X)
@@ -75,7 +75,7 @@ describe('Tier 3 Cross-Feature Interactions', () => {
     const startButton = screen.getByRole('button', { name: /ENTER ARENA/i });
     fireEvent.click(startButton);
 
-    const cells = container.querySelectorAll('.grid > button');
+    const cells = container.querySelectorAll('[data-testid="game-board-grid"] button');
 
     // Player X moves at index 0
     fireEvent.click(cells[0]);
@@ -130,7 +130,7 @@ describe('Tier 3 Cross-Feature Interactions', () => {
     expect(storedSettings.audio.sfxEnabled).toBe(false);
 
     // Switch back to Arena tab and verify mute button state persists
-    const arenaTab = screen.getByRole('button', { name: /Arena/i });
+    const arenaTab = screen.getByRole('button', { name: /^Arena$/i });
     fireEvent.click(arenaTab);
 
     const unmuteButton = screen.getByTitle(/Unmute Procedural Audio/i);
@@ -153,7 +153,7 @@ describe('Tier 3 Cross-Feature Interactions', () => {
     const startButton = screen.getByRole('button', { name: /ENTER ARENA/i });
     fireEvent.click(startButton);
 
-    const cells = container.querySelectorAll('.grid > button');
+    const cells = container.querySelectorAll('[data-testid="game-board-grid"] button');
 
     // Player X moves at index 0, Player O moves at index 4
     fireEvent.click(cells[0]); // X
@@ -185,7 +185,7 @@ describe('Tier 3 Cross-Feature Interactions', () => {
     const startButton = screen.getByRole('button', { name: /ENTER ARENA/i });
     fireEvent.click(startButton);
 
-    const cells3x3 = container.querySelectorAll('.grid > button');
+    const cells3x3 = container.querySelectorAll('[data-testid="game-board-grid"] button');
     expect(cells3x3.length).toBe(9);
 
     // Make a move to start history
@@ -207,7 +207,7 @@ describe('Tier 3 Cross-Feature Interactions', () => {
     expect(storedSettings.streakToWin).toBe(4);
 
     // Navigate back to Arena tab
-    const arenaTab = screen.getByRole('button', { name: /Arena/i });
+    const arenaTab = screen.getByRole('button', { name: /^Arena$/i });
     fireEvent.click(arenaTab);
 
     // Game state is reset to IDLE ("ENTER ARENA" / "Select Mode & Begin" button present)
@@ -218,7 +218,7 @@ describe('Tier 3 Cross-Feature Interactions', () => {
     fireEvent.click(enterArenaButton);
 
     // Board resized to 16 cells (4x4) and history is cleared
-    const cells4x4 = container.querySelectorAll('.grid > button');
+    const cells4x4 = container.querySelectorAll('[data-testid="game-board-grid"] button');
     expect(cells4x4.length).toBe(16);
     Array.from(cells4x4).forEach((cell) => {
       expect(cell).toHaveTextContent('');
@@ -240,7 +240,7 @@ describe('Tier 3 Cross-Feature Interactions', () => {
     const startButton = screen.getByRole('button', { name: /ENTER ARENA/i });
     fireEvent.click(startButton);
 
-    const cells = container.querySelectorAll('.grid > button');
+    const cells = container.querySelectorAll('[data-testid="game-board-grid"] button');
 
     // Move 1: Player X moves at index 0
     fireEvent.click(cells[0]);

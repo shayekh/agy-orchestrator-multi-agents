@@ -464,13 +464,16 @@ describe('Tier 1 Feature Coverage Test Suite', () => {
       const onSelect = vi.fn();
       render(<ThemeSelector currentTheme="CYBERPUNK" onSelectTheme={onSelect} />);
 
-      expect(screen.getByText('Cyberpunk Neon')).toBeDefined();
-      expect(screen.getByText('Glassmorphism Frost')).toBeDefined();
-      expect(screen.getByText('Retro Synthwave')).toBeDefined();
-      expect(screen.getByText('Minimalist Luxury')).toBeDefined();
-      expect(screen.getByText('Cosmic Nebula')).toBeDefined();
+      const matchNonOption = (text: string) => (content: string, element: Element | null) => 
+        element?.tagName.toLowerCase() !== 'option' && content === text;
 
-      fireEvent.click(screen.getByText('Glassmorphism Frost'));
+      expect(screen.getByText(matchNonOption('Cyberpunk Neon'))).toBeDefined();
+      expect(screen.getByText(matchNonOption('Glassmorphism Frost'))).toBeDefined();
+      expect(screen.getByText(matchNonOption('Retro Synthwave'))).toBeDefined();
+      expect(screen.getByText(matchNonOption('Minimalist Luxury'))).toBeDefined();
+      expect(screen.getByText(matchNonOption('Cosmic Nebula'))).toBeDefined();
+
+      fireEvent.click(screen.getByText(matchNonOption('Glassmorphism Frost')));
       expect(onSelect).toHaveBeenCalledWith('GLASSMORPHISM');
     });
 
@@ -526,13 +529,13 @@ describe('Tier 1 Feature Coverage Test Suite', () => {
       const statsTab = screen.getByText('Stats');
 
       fireEvent.click(settingsTab);
-      expect(screen.getByText('Arena Configurations')).toBeDefined();
+      expect(screen.getByText('Visual Theme Atmosphere')).toBeDefined();
 
       fireEvent.click(statsTab);
-      expect(screen.getByText('Combat Statistics')).toBeDefined();
+      expect(screen.getByText('ARENA LEADERBOARD & STATS')).toBeDefined();
 
       fireEvent.click(playTab);
-      expect(screen.queryByText('Arena Configurations')).toBeNull();
+      expect(screen.queryByText('Visual Theme Atmosphere')).toBeNull();
     });
 
     it('5.6 renders GameBoard with appropriate grid layout according to size', () => {
@@ -757,7 +760,7 @@ describe('Tier 1 Feature Coverage Test Suite', () => {
       fireEvent.click(configTab);
 
       // Click 4x4 Grid size button
-      const size4Btn = screen.getByText('4x4');
+      const size4Btn = screen.getByText('4x4 Grid');
       fireEvent.click(size4Btn);
 
       const storedSettings = localStorage.getItem('ultra_tictactoe_settings_v1');
@@ -813,8 +816,9 @@ describe('Tier 1 Feature Coverage Test Suite', () => {
 
       // Open Stats tab
       fireEvent.click(screen.getByText('Stats'));
-      expect(screen.getByText('Player X Wins')).toBeDefined();
-      expect(screen.getByText('5')).toBeDefined(); // 5 wins
+      const pxWinsLabel = screen.getByText('Player X Wins');
+      expect(pxWinsLabel).toBeDefined();
+      expect(pxWinsLabel.parentElement?.textContent).toContain('5');
     });
 
     it('9.4 calculates win rate percentages accurately in Stats view', () => {

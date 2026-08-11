@@ -130,11 +130,20 @@ if (typeof window !== 'undefined' && typeof HTMLCanvasElement !== 'undefined') {
 
 // Mock requestAnimationFrame and cancelAnimationFrame
 if (typeof window !== 'undefined') {
+  let rafId = 0;
+  const rafMap = new Map<number, number>();
   window.requestAnimationFrame = (callback: FrameRequestCallback): number => {
-    return window.setTimeout(() => callback(performance.now()), 16) as unknown as number;
+    const id = ++rafId;
+    rafMap.set(id, window.setTimeout(() => {
+      rafMap.delete(id);
+      callback(performance.now());
+    }, 16) as unknown as number);
+    return id;
   };
   window.cancelAnimationFrame = (id: number): void => {
-    window.clearTimeout(id);
+    const timeoutId = rafMap.get(id);
+    if (timeoutId) window.clearTimeout(timeoutId);
+    rafMap.delete(id);
   };
 }
 
