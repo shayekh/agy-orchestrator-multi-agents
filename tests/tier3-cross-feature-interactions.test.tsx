@@ -49,8 +49,8 @@ describe('Tier 3 Cross-Feature Interactions', () => {
     expect(confettiSpy).toHaveBeenCalledTimes(1);
 
     // 3. Victory Modal rendering in DOM
-    expect(screen.getByText(/Claims Victory!/i)).toBeInTheDocument();
-    expect(screen.getByText(/Cyber Champion Claims Victory!/i)).toBeInTheDocument();
+    expect(screen.getByText(/Victorious!/i)).toBeInTheDocument();
+    expect(screen.getByText(/Cyber Champion Victorious!/i)).toBeInTheDocument();
 
     // 4 & 5. Player stat increment & localStorage sync
     const storedStatsRaw = localStorage.getItem('ultra_tictactoe_stats_v1');
@@ -106,7 +106,7 @@ describe('Tier 3 Cross-Feature Interactions', () => {
     const { container } = render(<App />);
 
     // Mute sound via header button
-    const muteButton = screen.getByTitle(/Mute Procedural Audio/i);
+    const muteButton = screen.getByTitle(/Mute Sound FX/i);
     fireEvent.click(muteButton);
 
     // Switch to Settings tab
@@ -133,7 +133,7 @@ describe('Tier 3 Cross-Feature Interactions', () => {
     const arenaTab = screen.getByRole('button', { name: /^Arena$/i });
     fireEvent.click(arenaTab);
 
-    const unmuteButton = screen.getByTitle(/Unmute Procedural Audio/i);
+    const unmuteButton = screen.getByTitle(/Enable Sound FX/i);
     expect(unmuteButton).toBeInTheDocument();
   });
 

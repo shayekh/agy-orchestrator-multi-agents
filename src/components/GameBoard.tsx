@@ -63,6 +63,7 @@ export const GameBoard: React.FC<GameBoardProps> = ({ gameState, onCellClick, is
                 {/* Placed Cell Symbols */}
                 {cellValue === 'X' && <XSymbol isWinning={isWinningCell} />}
                 {cellValue === 'O' && <OSymbol isWinning={isWinningCell} />}
+                <span className="sr-only">{cellValue || ''}</span>
 
                 {/* Hover Preview Ghost Symbol */}
                 {isHovered && (
